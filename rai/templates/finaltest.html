@@ -1,0 +1,1549 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Parlour - Cart</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link href="/static/img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
+    
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <style>
+      :root {
+        --primary-color: #ff6b6b;
+        --secondary-color: #fbaf32;
+        --text-color: #2d3436;
+        --background-color: #f9f9f9;
+        --footer-color: #2d3436;
+        --green-logo: #acc965;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--background-color);
+      }
+
+      /* Header Styles */
+      .header-image {
+        /* margin: 0;
+        padding: 0; */
+        background-image: url("/static/img/rai2.jpg");
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        position: absolute;
+        align-items: center;
+        z-index: -1;
+        /* margin-left: 107px; */
+        filter: blur(5px);
+        background-size: cover;
+        /* align-content: center; */
+      }
+
+      header {
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .header-container h1 {
+        color: var(--green-logo);
+      }
+
+      .header-container {
+        /* max-width: 100%; */
+        width: 1600px;
+        margin: .3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 2rem;
+        height: 5rem;
+        border-radius: 50px;
+        margin-top: 2rem;
+      }
+
+      .cart-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-left: 1rem;
+      }
+
+      .cart-count {
+        background-color: white;
+        color: var(--primary-color);
+        padding: 0.2rem 0.5rem;
+        border-radius: 50%;
+        font-size: 0.8rem;
+      }
+
+      /* Cuisine Navigation */
+      .cuisine-nav {
+        max-width: 1220px;
+        margin: 0 auto 2rem;
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        padding: 1rem;
+        background: rgb(255, 255, 255);
+        border-radius: 25px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .cuisine-btn {
+        background: none;
+        border: 2px solid var(--secondary-color);
+        color: var(--secondary-color);
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .cuisine-btn.active {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+
+      /* Section Styles */
+      .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--secondary-color);
+        font-size: 2rem;
+        position: relative;
+        /* padding-bottom: 1rem; */
+        margin-top: 0rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background-color: var(--secondary-color);
+      }
+
+      .food-section {
+        display: none;
+        margin-bottom: 3rem;
+      }
+
+      .food-section.active {
+        display: block;
+      }
+
+      /* Main Content Styles */
+      main {
+        margin-top: 80px;
+        padding: 2rem;
+        height: 75%;
+      }
+
+      .food-slider {
+        max-width: 1025px;
+        margin: 0 auto;
+        position: relative;
+        padding: 0 60px;
+      }
+
+      .slider-container {
+        overflow: hidden;
+      }
+
+      .food-items {
+        display: flex;
+        transition: transform 0.3s ease;
+        gap: 2rem;
+      }
+
+      .food-item {
+        min-width: 200px;
+        max-width: 200px;
+        background: white;
+        border-radius: 10px;
+        padding: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .food-item img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+
+      .food-item h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        height: 2.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .food-item p {
+        color: var(--primary-color);
+        font-weight: bold;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      /* Quantity Controls */
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        /* margin-bottom: 1rem; */
+        padding: 0.5rem;
+        background-color: var(--background-color);
+        border-radius: 25px;
+      }
+
+      .quantity-btn {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .quantity-btn:hover {
+        background-color: #3db1a8;
+      }
+
+      .quantity {
+        font-weight: bold;
+        font-size: 1.1rem;
+        min-width: 30px;
+        text-align: center;
+      }
+
+      .add-to-cart {
+        background-color: var(--secondary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .add-to-cart:hover {
+        background-color: #3db1a8;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .prev {
+        left: 0;
+      }
+
+      .next {
+        right: 0;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: var(--footer-color);
+        color: white;
+        padding: 2rem 0;
+        margin-top: 4rem;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        text-align: center;
+      }
+
+      .total-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+      }
+
+      .total-section h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .checkout-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+      }
+
+      .checkout-btn:hover {
+        background-color: #ff5252;
+      }
+
+      .payment{
+        align-items: center;
+        text-align: center;
+      }
+
+      .total-section h3{
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .food-item {
+          min-width: 150px;
+          max-width: 150px;
+        }
+
+        .food-item img {
+          height: 120px;
+        }
+
+        .food-item h3 {
+          font-size: 0.9rem;
+        }
+
+        .food-item p {
+          font-size: 0.9rem;
+        }
+
+        .cuisine-nav {
+          padding: 0.5rem;
+        }
+
+        .cuisine-btn {
+          padding: 0.4rem 1rem;
+          font-size: 0.9rem;
+        }
+      }
+      .list-items{
+            color: #e28413;
+            border: 1px solid #e28413;
+            border-style: none;
+            background: transparent;
+            font-size: 20px;
+            margin-bottom: .5rem;
+            margin-right: .5rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+        .list-items option {
+            color: #e28413;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+  </head>
+  <body>
+      <div class="navbar navbar-expand-lg bg-light navbar-light" >
+        <div class="header-container" style="background-color: #acc965; margin-top: -155px; gap: 7px;">
+            <a href="index.html" class="navbar-brand">Welcome <span>Parlour</span></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                  <a href="/index" class="nav-item nav-link">Home</a>
+                  <a href="/about" class="nav-item nav-link">About</a>
+                  <a href="/feature" class="nav-item nav-link">Feature</a>
+                  <a href="/team" class="nav-item nav-link">Chef</a>
+                  <a href="/menu" class="nav-item nav-link">Menu</a>
+                  <a href="/contact" class="nav-item nav-link">Contact</a>
+                  {% if user.is_authenticated %}
+                  <a href="{% url 'logout' %}" class="nav-item nav-link">Log-Out</a>
+                  {% else %}
+                  <a href="{% url 'login' %}" class="nav-item nav-link">Log-in</a>
+                  <a href="{% url 'register' %}" class="btn custom-btn">Register</a>
+                  {% endif %}
+                  {% if user.is_authenticated %}
+                  <a class="cart-btn" href="{% url 'cart' %}">
+                    <i class="fas fa-shopping-cart"></i>
+                  </a>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="header-image"></div>
+    <main>
+      <nav class="cuisine-nav">
+        <button class="cuisine-btn active" data-cuisine="southindian">
+          South Indian
+        </button>
+        <button class="cuisine-btn" data-cuisine="burgers">Burgers</button>
+        <button class="cuisine-btn" data-cuisine="garlicbread">
+          Garlic Bread
+        </button>
+        <button class="cuisine-btn" data-cuisine="drinks">Drinks</button>
+        <button class="cuisine-btn" data-cuisine="pizza">Pizza</button>
+        <button class="cuisine-btn" data-cuisine="snacks">Snacks</button>
+        <button class="cuisine-btn" data-cuisine="chines">Chines</button>
+        <button class="cuisine-btn" data-cuisine="sandwich">Sandwich</button>
+        <button class="cuisine-btn" data-cuisine="extras">Extras</button>
+        
+      </nav>
+
+      <section class="food-section active" id="southindian">
+        <h2 class="section-title">South Indian Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/planpaper.jpg" alt="Masala Dosa" />
+                <h3>Plain Paper</h3>
+                <p>₹ 50</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="50">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/masaladosa.jpg" alt="Idli Sambar" />
+                <h3>Masala Dosa</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesedosa.jpg" alt="Masala Dosa" />
+                <h3>Cheese Dosa</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesebutter.jpg" alt="Masala Dosa" />
+                <h3>Cheese Butter Paper</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/uttapam.jpg" alt="Masala Dosa" />
+                <h3>Uttapam</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/uttapamonion.jpg" alt="Masala Dosa" />
+                <h3>Onion Uttapam</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="burgers">
+        <h2 class="section-title">Burgers Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/alootikki.jpg" alt="Noodles" />
+                <h3>Aloo Tikki Burger - Spicy fried Aloo</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheeseburger.jpg" alt="Dim Sum" />
+                <h3>Cheese Burger</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/doublealootikki.jpg" alt="Dim Sum" />
+                <h3>Dubble Tikki Burger</h3>
+                <p>₹ 120</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="120">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="garlicbread">
+        <h2 class="section-title">Garlic Bread Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/garlicbread.jpg" alt="Butter Chicken" />
+                <h3>Garlic Bread</h3>
+                <p>₹ 100</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="100">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesegarlic.jpg" alt="Naan" />
+                <h3>Cheese Garlic Bread</h3>
+                <p>₹ 100</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="100">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/americancorngarlic.jpg" alt="Naan" />
+                <h3>American Corn Garlic Bread</h3>
+                <p>₹ 130</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="130">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="drinks">
+        <h2 class="section-title">Drinks Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/tea.jpg" alt="Pizza" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Tea</h3>
+                <p>₹ 10</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="10">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/chocolateshake.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Chocolate Shake</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/coldcoffe.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Cold Coffee</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/oreoshake.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Oreo Shake</h3>
+                <p>₹ 100</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="100">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/mountaindew.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Mountain Dew</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/pepsi.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Pepsi</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cocacola.jpg" alt="Pasta" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Coca Cola</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/sting.jpg" alt="Pasta" />
+                <h3>Sting</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/sosyo.jpg" alt="Pasta" />
+                <h3>Sosyo</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/thumbsup.jpg" alt="Pasta" />
+                <h3>Thumps Up</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/sprite.jpg" alt="Pasta" />
+                <h3>Sprite</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/campa.jpg" alt="Pasta" />
+                <h3>Campa</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/mazza.jpg" alt="Pasta" />
+                <h3>Maaza</h3>
+                <p>₹ 25</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="25">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/hell.jpg" alt="Pasta" />
+                <h3>Hell</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/redbull.jpg" alt="Pasta" />
+                <h3>Red Bull</h3>
+                <p>₹ 125</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="125">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="pizza">
+        <h2 class="section-title">Pizzas Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/vegpizza.jpg" alt="Noodles" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Veg PIzza</h3>
+                <p>₹ 110</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="110">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/italianpizza.jpg" alt="Dim Sum" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Italian Pizza</h3>
+                <p>₹ 120</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="120">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/margheritapizza.jpg" alt="Dim Sum" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Margherita Pizza</h3>
+                <p>₹ 120</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="120">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/americancornpizza.jpg" alt="Dim Sum" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> American Corn Pizza</h3>
+                <p>₹ 140</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="140">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/7cheesepizza.jpg" alt="Dim Sum" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> 7 Cheese Pizza</h3>
+                <p>₹ 160</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="160">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/valcenopizza.jpg" alt="Dim Sum" />
+                <h3><span style="color: #ff6b6b; font-weight: bold; margin-right: 5px;"></span> Volcano Pizza</h3>
+                <p>₹ 180</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="180">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="snacks">
+        <h2 class="section-title">Snacks Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/dabeli.jpg" alt="Noodles" />
+                <h3>Dabeli</h3>
+                <p>₹ 30</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="30">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/masala pav.jpg" alt="Dim Sum" />
+                <h3>Masala Pav</h3>
+                <p>₹ 20</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="20">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/vadapau.jpg" alt="Dim Sum" />
+                <h3>Margherita PizzaVada Pav</h3>
+                <p>₹ 30</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="30">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/breadpakoda.jpg" alt="Dim Sum" />
+                <h3>Bread Pakoda</h3>
+                <p>₹ 30</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="30">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/periperifrench.jpg" alt="Dim Sum" />
+                <h3>Peri Peri French Fries</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/mayoniesfrench.jpg" alt="Dim Sum" />
+                <h3>Mayonnaise French Fries</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="chines">
+        <h2 class="section-title">Chines Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/planmeggie.jpg" alt="Noodles" />
+                <h3>Plain Maggie</h3>
+                <p>₹ 40</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="40">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/onionmeggie.jpg" alt="Dim Sum" />
+                <h3>Onion Maggie</h3>
+                <p>₹ 50</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="50">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesemaggie.jpg" alt="Dim Sum" />
+                <h3>Cheese Maggie</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/drymanchurian.jpg" alt="Dim Sum" />
+                <h3>Dry Manchurian</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/gravymanchurain.jpg" alt="Dim Sum" />
+                <h3>Gravy Manchurian</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/hakkanoodles.jpg" alt="Dim Sum" />
+                <h3>Hakka Noodles</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="sandwich">
+        <h2 class="section-title">Sandwich Delights</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/vegetablesandwich.jpg" alt="Noodles" />
+                <h3>Vegetable</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/aloomatarsandwich.jpg" alt="Dim Sum" />
+                <h3>Aloo Matar</h3>
+                <p>₹ 40</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="40">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesealoomatarsandwich.jpg" alt="Dim Sum" />
+                <h3>Cheese Aloo Matar</h3>
+                <p>₹ 50</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="50">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesevegetable.jpg" alt="Dim Sum" />
+                <h3>Cheese Vegetable</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cheesesandwich.jpg" alt="Dim Sum" />
+                <h3>Cheese Sandwich</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/maxicansandwich.jpg" alt="Dim Sum" />
+                <h3>Maxican Sandwich</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/clubsandwich.jpg" alt="Dim Sum" />
+                <h3>Club Sandwich</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/mountainsandwich.jpg" alt="Dim Sum" />
+                <h3>Mountain Sandwich</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section class="food-section" id="extras">
+        <h2 class="section-title">Extras Items</h2>
+        <div class="food-slider">
+          <button class="slider-btn prev">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div class="slider-container">
+            <div class="food-items">
+              <div class="food-item">
+                <img src="/static/img/maskabun.jpg" alt="Noodles" />
+                <h3>Maska Bun</h3>
+                <p>₹ 30</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="30">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/cholekhulche.jpg" alt="Dim Sum" />
+                <h3>Chole Khulche</h3>
+                <p>₹ 70</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="70">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/buttercholekhulche.jpg" alt="Dim Sum" />
+                <h3>Butter Chole Khulche</h3>
+                <p>₹ 80</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="80">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/pavbhaji.jpg" alt="Dim Sum" />
+                <h3>Pav Bhaji</h3>
+                <p>₹ 90</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="90">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/butterpaubhaji.jpg" alt="Dim Sum" />
+                <h3>Butter Pav Bhaji</h3>
+                <p>₹ 100</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="100">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/thepla.jpg" alt="Dim Sum" />
+                <h3>Thepla</h3>
+                <p>₹ 60</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="60">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+          <button class="slider-btn next">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+    </main>
+    
+    <div class="payment">
+      <div class="total-section">
+          <h2>Total Price: ₹<span id="total-price">0.00</span></h2>
+          <button class="checkout-btn" onclick="viewInvoice()">View Invoice</button>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-7">
+                  <div class="row">
+                      <div class="col-md-6">
+                          <div class="footer-contact">
+                              <h2>Our Address</h2>
+                              <p><i class="fa fa-map-marker-alt"></i>Rai University, Fountain Garden</p>
+                              <p><i class="fa fa-phone-alt"></i>+91 8460107199</p>
+                              <p><i class="fa fa-envelope"></i>rai@parlourgmail.com</p>
+                              <div class="footer-social">
+                                  <a href=""><i class="fab fa-twitter"></i></a>
+                                  <a href=""><i class="fab fa-facebook-f"></i></a>
+                                  <a href=""><i class="fab fa-youtube"></i></a>
+                                  <a href=""><i class="fab fa-instagram"></i></a>
+                                  <a href=""><i class="fab fa-linkedin-in"></i></a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="footer-link">
+                              <h2>Quick Links</h2>
+                              <a href="">Terms of use</a>
+                              <a href="">Privacy policy</a>
+                              <a href="">Cookies</a>
+                              <a href="">Help</a>
+                              <a href="">FQAs</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-5">
+                  <div class="footer-newsletter">
+                      <h2>Welcome Parlour</h2>
+                      <p>
+                          Join us at Welcome Parlour for delicious food and great moments. We can't wait to serve you! 🍽️✨
+                      </p>
+                      <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                          {% csrf_token %}
+                          <input class="form-control" name="email" placeholder="Email goes here">
+                          <button class="btn custom-btn" type="submit"><b>Connect with Us</b></button>
+                      </form>
+                  </div>
+              </div>
+              <div class="col-lg-5">
+                  <div class="footer-newsletter">
+                      <h2>Opening</h2>
+                      <p>
+                          Monday to Saturday -- 09 AM to 09 PM
+                      </p>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div style="background-color: #fbaf32; color: white;">
+          <marquee behavior="" direction="left"><b>Indulge in a delightful culinary experience at our food parlour! 🌟 Treat your taste buds to our mouthwatering dishes made with the finest ingredients. 🍲✨ Enjoy a cozy and welcoming ambiance that makes every meal special. 🛋️💕 From scrumptious appetizers to decadent desserts, we have something for everyone! 🥗🍰 Take advantage of our special promotions for first-time visitors and loyal customers. 🎉🎁 Conveniently located at Rai University, with ample parking available. 🚗📍 Book your table now and savor the flavors that will leave you craving for more! 📞💖 We look forward to serving you at Welcome Parlour! 😊🍽️</b></marquee>
+      </div>
+      <div class="copyright">
+          <div class="container">
+              <p>Copyright &copy; <a href="#">Welcome Parlour</a>, All Right Reserved.</p>
+              <p>Designed By <a href="">Krunal Viradiya</a></p>
+          </div>
+      </div>
+  </div>
+  <!-- Footer End -->
+
+    <script>
+      let totalPrice = 0;
+      const cartItems = {};
+
+      function updateTotalPrice() {
+        document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+      }
+
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function() {
+          const foodItem = this.parentElement;
+          const itemName = foodItem.querySelector('h3').innerText;
+          const quantity = foodItem.querySelector('.quantity').innerText;
+          const price = parseFloat(this.dataset.price);
+          const quantityValue = parseInt(quantity) || 0;
+
+          if (quantityValue > 0) {
+            if (!cartItems[itemName]) {
+              cartItems[itemName] = { price: price, quantity: 0 };
+            }
+            
+            const oldQuantity = cartItems[itemName].quantity;
+            const additionalQuantity = quantityValue - oldQuantity;
+            totalPrice += price * additionalQuantity;
+            
+            cartItems[itemName].quantity = quantityValue;
+            
+            updateTotalPrice();
+            
+            alert(`${itemName} added to cart (${quantityValue} items)!`);
+          } else {
+            alert('Please select a quantity greater than 0 to add this item to cart.');
+          }
+        });
+      });
+
+      document.querySelectorAll('.quantity-controls').forEach(control => {
+        const minusBtn = control.querySelector('.minus');
+        const plusBtn = control.querySelector('.plus');
+        const quantitySpan = control.querySelector('.quantity');
+        const foodItem = control.closest('.food-item');
+        const foodName = foodItem ? foodItem.querySelector('h3').innerText : '';
+        const priceEl = foodItem ? foodItem.querySelector('.add-to-cart') : null;
+        let quantity = 0;
+
+        minusBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (quantity > 0) {
+            quantity--;
+            quantitySpan.textContent = quantity;
+            
+            if (foodName && priceEl && cartItems[foodName]) {
+              const price = parseFloat(priceEl.dataset.price);
+              
+              if (cartItems[foodName].quantity > quantity) {
+                totalPrice -= price;
+                cartItems[foodName].quantity = quantity;
+                updateTotalPrice();
+              }
+            }
+          }
+        });
+
+        plusBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          quantity++;
+          quantitySpan.textContent = quantity;
+        });
+      });
+    </script>
+    <script>
+      // Cart functionality
+      let cart = [];
+      let currentSlide = 4;
+      const itemsPerSlide = 4;
+
+      // DOM Elements
+      const foodSections = document.querySelectorAll(".food-section");
+      const cuisineButtons = document.querySelectorAll(".cuisine-btn");
+      const cartCount = document.querySelector(".cart-count");
+      const totalAmount = document.getElementById("total-amount");
+
+      // Cuisine section switching
+      cuisineButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          cuisineButtons.forEach((btn) => btn.classList.remove("active"));
+          foodSections.forEach((section) => section.classList.remove("active"));
+
+          button.classList.add("active");
+          const sectionId = button.dataset.cuisine;
+          document.getElementById(sectionId).classList.add("active");
+        });
+      });
+
+      // Slider functionality
+      foodSections.forEach((section) => {
+        const foodItems = section.querySelector(".food-items");
+        const prevBtn = section.querySelector(".prev");
+        const nextBtn = section.querySelector(".next");
+        let sectionCurrentSlide = 0;
+
+        function updateSlider() {
+          const slideWidth =
+            section.querySelector(".food-item").offsetWidth + 32;
+          foodItems.style.transform = `translateX(-${
+            sectionCurrentSlide * slideWidth
+          }px)`;
+
+          // Update button states
+          prevBtn.style.opacity = sectionCurrentSlide === 0 ? "0.5" : "1";
+          prevBtn.style.cursor =
+            sectionCurrentSlide === 0 ? "not-allowed" : "pointer";
+
+          const maxSlide =
+            section.querySelectorAll(".food-item").length - itemsPerSlide;
+          nextBtn.style.opacity = sectionCurrentSlide >= maxSlide ? "0.5" : "1";
+          nextBtn.style.cursor =
+            sectionCurrentSlide >= maxSlide ? "not-allowed" : "pointer";
+        }
+
+        prevBtn.addEventListener("click", () => {
+          if (sectionCurrentSlide > 0) {
+            sectionCurrentSlide--;
+            updateSlider();
+          }
+        });
+
+        nextBtn.addEventListener("click", () => {
+          const maxSlide =
+            section.querySelectorAll(".food-item").length - itemsPerSlide;
+          if (sectionCurrentSlide < maxSlide) {
+            sectionCurrentSlide++;
+            updateSlider();
+          }
+        });
+
+        // Initialize slider
+        updateSlider();
+      });
+
+
+      // Handle window resize
+      window.addEventListener("resize", () => {
+        foodSections.forEach((section) => {
+          if (section.classList.contains("active")) {
+            const foodItems = section.querySelector(".food-items");
+            const slideWidth =
+              section.querySelector(".food-item").offsetWidth + 32;
+            foodItems.style.transform = `translateX(-${
+              currentSlide * slideWidth
+            }px)`;
+          }
+        });
+      });
+
+      function viewInvoice() {
+        const totalPrice = document.getElementById('total-price').innerText;
+        localStorage.setItem('totalPrice', totalPrice);
+        
+        // Get all food items that have been added to cart
+        const selectedItems = [];
+        
+        // Find all food items with quantity > 0
+        const foodItems = document.querySelectorAll('.food-item');
+        foodItems.forEach(item => {
+          const quantityDisplay = item.querySelector('.quantity-controls .quantity');
+          if (quantityDisplay && parseInt(quantityDisplay.innerText) > 0) {
+            const name = item.querySelector('h3').innerText;
+            const price = parseFloat(item.querySelector('p').innerText.replace('₹', '').trim());
+            const quantity = parseInt(quantityDisplay.innerText);
+            
+            selectedItems.push({
+              name: name,
+              price: price,
+              quantity: quantity
+            });
+          }
+        });
+        
+        // Store selected items in localStorage
+        localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+        
+        // Navigate to invoice page
+        window.location.href = '{% url 'invoice' %}';
+      }
+    </script>
+    <script>
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Check if this cookie string begins with the name we want
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+    </script>
+    <script>
+      document.querySelector('form')?.onsubmit = async function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        const formData = new FormData(this);
+        const response = await fetch('/calculate_price', {
+          method: 'POST',  
+          body: formData
+        });
+        const result = await response.json();
+        if (response.ok) {
+          document.getElementById('total-amount').innerText = result.total_price.toFixed(2);
+        } else {
+          alert('Error: ' + result.error);
+        }
+      };
+    </script>
+  </body>
+</html>

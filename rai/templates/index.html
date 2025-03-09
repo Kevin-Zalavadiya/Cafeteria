@@ -1,0 +1,838 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Welcome Parlour</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free Website Template" name="keywords">
+        <meta content="Free Website Template" name="description">
+
+        <!-- Favicon -->
+        <link href="/static/img/favicon.ico" rel="icon">
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
+        
+        <!-- CSS Libraries -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+        <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+        <!-- Template Stylesheet -->
+        <link href="/static/css/style.css" rel="stylesheet">
+        <style>
+            .cart-btn {
+                background-color: rgb(196, 47, 47);
+                color: white;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 25px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-left: 1rem;
+            }
+            .list-items{
+            color: #e28413;
+            border: 1px solid #e28413;
+            border-style: none;
+            background: transparent;
+            font-size: 20px;
+            margin-bottom: .5rem;
+            margin-right: .5rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+        .list-items option {
+            color: #e28413;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        </style>
+    </head>
+
+    <body>
+        <!-- Nav Bar Start -->
+        <div class="navbar navbar-expand-lg bg-light navbar-light">
+            <div class="container-fluid">
+                <a href="index.html" class="navbar-brand">Welcome <span>Parlour</span></a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto">
+                        <a href="/index" class="nav-item nav-link active">Home</a>
+                        <a href="/about" class="nav-item nav-link">About</a>
+                        <a href="/feature" class="nav-item nav-link">Feature</a>
+                        <a href="/team" class="nav-item nav-link">Chef</a>
+                        <a href="/menu" class="nav-item nav-link">Menu</a>
+                        <a href="/contact" class="nav-item nav-link">Contact</a>
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'logout' %}" class="nav-item nav-link">Log-Out</a>
+                        {% else %}
+                        <a href="{% url 'login' %}" class="nav-item nav-link">Log-in</a>
+                        <a href="{% url 'register' %}" class="btn custom-btn">Register</a>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <a class="cart-btn" href="{% url 'cart' %}">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Bar End -->
+
+
+        <!-- Carousel Start -->
+        <div class="carousel">
+            <div class="container-fluid">
+                <div class="owl-carousel">
+                    <div class="carousel-item">
+                        <div class="carousel-img" >
+                            <img src="/static/img/rai4.jpg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>Best <span>Quality</span> Ingredients</h1>
+                            <p>
+                                Welcome to Welcome Parlour! Your go-to spot for mouthwatering snacks and delightful meals. Whether you're craving a cheesy Maggi, spicy Manchurian, or a wholesome Aloo Matar Sandwich, we've got you covered. Sit back, relax, and indulge in our delicious offerings. Bon appétit! 🍽️✨
+                            </p>
+                            <div class="carousel-btn">
+                                <a class="btn custom-btn" href="/menu"><b>Dive into Delicacies</b></a>
+                                <a class="btn custom-btn" href="/register">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-img">
+                            <img src="/static/img/rai4.jpg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>University's <span>Best</span> Chef</h1>
+                            <p>
+                                Our chef at Welcome Parlour crafts delicious dishes with passion and expertise, using fresh ingredients to ensure every meal is a delightful experience. Come taste the love and creativity in every bite! 🍽️👨‍🍳
+                            </p>
+                            <div class="carousel-btn">
+                                <a class="btn custom-btn" href="/menu"><b>Taste the Experience</b></a>
+                                <a class="btn custom-btn" href="/register">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="carousel-img" >
+                            <img src="/static/img/rai4.jpg" alt="Image">
+                        </div>
+                        <div class="carousel-text">
+                            <h1>Fastest Food <span>Serving</span></h1>
+                            <p>
+                                At Welcome Parlour, we serve fresh, delicious food with a smile. Enjoy a wonderful meal, always hot and flavorful! 🍽️✨
+                            </p>
+                            <div class="carousel-btn">
+                                <a class="btn custom-btn" href="/menu"><b>Discover Delights</b></a>
+                                <a class="btn custom-btn" href="/register" >Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+        
+    
+        <!-- About Start -->
+        <div class="about">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-img">
+                            <img src="/static/img/about.jpg" alt="Image">
+                            <!-- <button type="button" class="btn-play" data-toggle="modal" data-src="https://www.youtube.com/watch?v=jySdcGARFPQ" data-target="#videoModal"> -->
+                                <span></span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <div class="section-header">
+                                <p>About Us</p>
+                                <h2>Cooking Since 2024</h2>
+                            </div>
+                            <div class="about-text">
+                                <p>
+                                    Welcome to Welcome Parlour, your ultimate destination for delicious and freshly prepared food. Our mission is to bring you a delightful dining experience with every visit. We take pride in offering a diverse menu that caters to all taste buds, from savory snacks like Cheese Maggi and Dry Manchurian to hearty meals like Gravy Manchurian and Club Sandwiches. Each dish is crafted with the finest ingredients and utmost care, ensuring that every bite is a burst of flavor and satisfaction.
+                                </p>
+                                <p>
+                                    At Welcome Parlour, we believe in the power of great food to create memorable moments. Our talented chef, with years of culinary expertise, pours passion and creativity into every dish, making sure that your meal is both delicious and nutritious. Our warm and inviting atmosphere, coupled with friendly and prompt service, makes us the perfect place to relax and enjoy a wonderful meal. Come and be a part of the Welcome Parlour family, where great food meets great moments. Bon appétit! 🍽️✨
+                                </p>
+                                <a class="btn custom-btn" href="/register"><b>Discover Now</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+        
+        
+        <!-- Video Modal Start-->
+        <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>        
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <!-- Video Modal End -->
+        
+        
+        <!-- Feature Start -->
+        <div class="feature">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="section-header">
+                            <p>Why Choose Us</p>
+                            <h2>Our Key Features</h2>
+                        </div>
+                        <div class="feature-text">
+                            <div class="feature-img">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <img src="/static/img/pepsi.jpg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/buttercholekhulche.jpg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/garlicbread.jpg" alt="Image">
+                                    </div>
+                                    <div class="col-6">
+                                        <img src="/static/img/maxicansandwich.jpg" alt="Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <p>
+                                At Welcome Parlour, we take pride in maintaining the highest quality of our food. Every dish is prepared using fresh and premium ingredients, ensuring exceptional taste and nutrition. Our commitment to quality means you can enjoy meals that are not only delicious but also wholesome. Experience the difference in every bite at Welcome Parlour! 🍽️✨
+                            </p> -->
+                            <!-- <a class="btn custom-btn" href="">Book A Table</a> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-medal"></i>
+                                    <h3>Best quality products</h3>
+                                    <p>
+                                        At Welcome Parlour, we pride ourselves on using only the best quality products to create our delicious dishes. Our commitment to excellence ensures that every ingredient is fresh and of the highest standard. Enjoy a premium dining experience with every bite! 🌿🍅🥕
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-vegetable"></i>
+                                    <h3>Natural ingredients</h3>
+                                    <p>
+                                        At Welcome Parlour, we use the freshest natural ingredients to craft flavorful and nutritious dishes. Our commitment to quality ensures that every meal is free from artificial preservatives. Taste the difference that natural ingredients make in every bite! 🌿🍅🥕
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-courier"></i>
+                                    <h3>Fastest food serving</h3>
+                                    <p>
+                                        At Welcome Parlour, we pride ourselves on our prompt and efficient service. Enjoy your delicious meals served hot and fresh, without the wait. Quick, tasty, and always satisfying! 🍽️✨
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="feature-item">
+                                    <i class="flaticon-fruits-and-vegetables"></i>
+                                    <h3>Amazing staff</h3>
+                                    <p>
+                                        At Welcome Parlour, our friendly and attentive staff are dedicated to providing you with an exceptional dining experience. Enjoy top-notch service with a smile! 😊👨‍🍳
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Feature End -->
+        
+        
+        <!-- Food Start -->
+        <div class="food">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-burger"></i>
+                            <h2>Burgers</h2>
+                            <p>
+                                At Welcome Parlour, our burgers are crafted with juicy patties and fresh ingredients. Enjoy a delicious blend of flavors in every bite, toasted bun. Bite into burger perfection with us! 🍔✨ 
+                            </p>
+                            <a href="/menu">View Menu</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-snack"></i>
+                            <h2>Snacks</h2>
+                            <p>
+                                At Welcome Parlour, we offer a variety of delicious snacks made with high-quality ingredients. Enjoy tasty treats that are perfect for any time of the day! 🍽️✨. 
+                            </p>
+                            <a href="/menu">View Menu</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-cocktail"></i>
+                            <h2>Drinks</h2>
+                            <p>
+                                At Welcome Parlour, we offer a refreshing selection of drinks to complement your meal. Enjoy a variety of beverages, from chilled soft drinks to energizing fresh juices! 🥤🍹. 
+                            </p>
+                            <a href="/menu">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Food End -->
+        
+        
+        <!-- Menu Start -->
+        <div class="menu">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Food Menu</p>
+                    <h2>Delicious Food Menu</h2>
+                </div>
+                <div class="menu-tab">
+                    <ul class="nav nav-pills justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" href="#drinks">Drinks</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#pizza">Pizza</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" href="#chines">Chines</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="drinks" class="container tab-pane active">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12">
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/tea.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Tea</span> <strong>₹ 10</strong></h3>
+                                            <p>Tea is more than a beverage; it’s an experience. One sip, a thousand stories. At Welcome Parlour, enjoy a refreshing cup of hot, aromatic tea, perfect for any time of day! ☕✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/chocolateshake.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Chocolate Shake</span> <strong>₹ 70</strong></h3>
+                                            <p>"Enjoy the rich and creamy delight of our Chocolate Shake, perfectly blended with premium cocoa and topped with a dollop of whipped cream for an indulgent treat. At Welcome Parlour, enjoy a rich and creamy chocolate shake that's perfect for indulging your sweet tooth! 🍫🥤</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/coldcoffe.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Cold Coffee</span> <strong>₹ 80</strong></h3>
+                                            <p>Refresh with our smooth, ice-cold blend of rich coffee and milk ☕❄️</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="img/oreoshake.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Oreo Shake</span> <strong>₹ 100</strong></h3>
+                                            <p>Indulge in our creamy Oreo Shake, blended to perfection with crushed cookies and topped with whipped cream for a delightful treat🍪🥤 </p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/fanta.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">  
+                                            <h3><span>Fanta</span> <strong>₹ 20</strong></h3>
+                                            <p>"Refresh yourself with the fizzy, citrusy goodness of Fanta, bursting with vibrant orange flavor. 🍊🥤</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 d-none d-lg-block">
+                                    <img src="/static/img/drinksmain2.jpg" alt="Image"> <br><br><br> <br><br>
+                                    <!-- <img src="img/drinksmain2.jpg" alt="Image"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pizza" class="container tab-pane fade">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12">
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/vegpizza.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Veg PIzza</span> <strong>₹ 110</strong></h3>
+                                            <p>Enjoy our delicious Veg Pizza, topped with a vibrant mix of fresh vegetables, mozzarella cheese, and a perfectly seasoned tomato sauce 🍕✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/italianpizza.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Italian Pizza</span> <strong>₹ 120</strong></h3>
+                                            <p>"Savor the taste of our authentic Italian Pizza, featuring a thin, crispy crust topped with fresh tomatoes, mozzarella, basil, and a drizzle of olive oil. 🍕✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/margheritapizza.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Margherita Pizza</span> <strong>₹ 120</strong></h3>
+                                            <p>"Savor the simplicity of our Margherita Pizza, topped with fresh tomatoes, mozzarella cheese, and fragrant basil leaves on a perfectly baked crust 🍕✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/americancornpizza.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>American Corn Pizza</span> <strong>₹ 140</strong></h3>
+                                            <p>Delight in our American Corn Pizza, topped with sweet corn, fresh veggies, and a generous layer of mozzarella cheese on a perfectly baked crust. 🍕✨</p>
+                                        </div>
+                                    </div><div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/7cheesepizza.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>7 Cheese Pizza</span> <strong>₹ 160</strong></h3>
+                                            <p>Indulge in our 7 Cheese Pizza, a decadent blend of mozzarella, cheddar, parmesan, gouda, blue cheese, provolone, and ricotta, melted to perfection on a golden crust🍕✨</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 d-none d-lg-block">
+                                    <img src="/static/img/menu2.jpg" alt="Image">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="chines" class="container tab-pane fade">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-12">
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/planmeggie.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Plain Maggie</span> <strong>₹ 40</strong></h3>
+                                            <p>Plan Maggi: Flavorful noodles with spices and a cheesy twist. At Welcome Parlour, our noodles are a delightful blend of flavors and textures, crafted with fresh ingredients and a touch of love. Enjoy a satisfying plate of perfectly cooked noodles, bursting with savory goodness! 🍜✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/onionmeggie.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Onion Maggie</span> <strong>₹ 50</strong></h3>
+                                            <p>Onion Maggi: Savory noodles infused with aromatic onions and spices🍜✨.</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/cheesemaggie.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Cheese Maggie</span> <strong>₹ 60</strong></h3>
+                                            <p>Cheese Maggi: Tasty noodles with a creamy, cheesy delight.🍜✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/drymanchurian.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Dry Manchurian</span> <strong>₹ 70</strong></h3>
+                                            <p>Dry Manchurian: Crispy vegetable balls tossed in tangy Manchurian sauce.🍜✨</p>
+                                        </div>
+                                    </div>
+                                    <div class="menu-item">
+                                        <div class="menu-img">
+                                            <img src="/static/img/gravymanchurain.jpg" alt="Image">
+                                        </div>
+                                        <div class="menu-text">
+                                            <h3><span>Gravy Manchurian</span> <strong>₹ 80</strong></h3>
+                                            <p>Gravy Manchurian: Crispy vegetable balls in a rich, savory sauce🍜✨</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 d-none d-lg-block">
+                                    <img src="/static/img/chinesmain.jpg" alt="Image">
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn custom-btn" href="/menu" style="width: 100%;"><b> Discover Our Dishes </b></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu End -->
+        
+        
+        <!-- Team Start -->
+        <div class="team">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Our Team</p>
+                    <h2>Our Master Chef</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="/static/img/team-1.jpg" alt="Image">
+                                <div class="team-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-text">
+                                <h2>Adam Phillips</h2>
+                                <p>CEO, Co Founder</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="/static/img/team-2.jpg" alt="Image">
+                                <div class="team-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-text">
+                                <h2>Dylan Adams</h2>
+                                <p>Master Chef</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="/static/img/team-3.jpg" alt="Image">
+                                <div class="team-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-text">
+                                <h2>Jhon Doe</h2>
+                                <p>Master Chef</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="/static/img/team-4.jpg" alt="Image">
+                                <div class="team-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="team-text">
+                                <h2>Josh Dunn</h2>
+                                <p>Master Chef</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn custom-btn" href="/team" style="width: 100%;"><b> Meet Our Stars </b></a>
+            </div>
+        </div>
+        <!-- Team End -->
+        
+        
+        <!-- Testimonial Start -->
+        <div class="testimonial">
+            <div class="container">
+                <div class="owl-carousel testimonials-carousel">
+                    <div class="testimonial-item">
+                        <div class="testimonial-img">
+                            <img src="/static/img/t1.jpg" alt="Image">
+                        </div>
+                        <p>
+                            Adwitiya seva aur swadisht bhojan! 🍽️✨ Har baar yahan aakar khushi hoti hai. 😊🌟
+                        </p>
+                        <h2>Shiv Mishra</h2>
+                        <h3>B.Tech Student</h3>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-img">
+                            <img src="/static/img/t2.jpg" alt="Image">
+                        </div>
+                        <p>
+                            Yahan ka mahol aur swad dono hi behad sunder hain! 🥘✨ Har visit ek yaadgaar anubhav hota hai. 😊🌟
+                        </p>
+                        <h2>Pradip Kumar</h2>
+                        <h3>BCA Student</h3>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-img">
+                            <img src="/static/img/t3.jpg" alt="Image">
+                        </div>
+                        <p>
+                            "Inki khaane ki baat hi kuch aur hai! 🍲✨ Har baar yahaan aakar ek nayā anubhav milta hai. 😊🌟
+                        </p>
+                        <h2>Aditi Shukla</h2>
+                        <h3>B.Farm Student</h3>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-img">
+                            <img src="/static/img/t4.jpg" alt="Image">
+                        </div>
+                        <p>
+                            Unka khaana aur mehman nawazi dono hi laajawaab hain! 🍛✨ Har visit yahaan ek yaadgaar hota hai. 😊🌟
+                        </p>
+                        <h2>Radhika Virani</h2>
+                        <h3>B.Com</h3>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-img">
+                            <img src="/static/img/t5.jpg" alt="Image">
+                        </div>
+                        <p>
+                            Har bite mein kuch khaas hai! 🍛✨ Unka khaana aur seva bas dil jeet lete hain. 😊🌟
+                        </p>
+                        <h2>Rajni Pandya</h2>
+                        <h3>Bsc.IT</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+        
+        
+        <!-- Contact Start -->
+        <div class="contact">
+            <div class="container">
+                <div class="section-header text-center">
+                    <p>Contact Us</p>
+                    <h2>Contact For Any Query</h2>
+                </div>
+                <div class="row align-items-center contact-information">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Address</h3>
+                                <p>Rai University, Fountain Garden</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Call Us</h3>
+                                <p>+91 8460107199</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email Us</h3>
+                                <p>rai@parlourgmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fa fa-share"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Follow Us</h3>
+                                <div class="contact-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row contact-form">
+                    <div class="col-md-6">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d919.4020026526699!2d72.47243034238149!3d22.816984315937553!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srai%20university%20ahmedabad!5e0!3m2!1sen!2sin!4v1738937888442!5m2!1sen!2sin" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="success"></div>
+                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                            <div class="control-group">
+                                <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="control-group">
+                                <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div>
+                                <button class="btn custom-btn" type="submit" id="sendMessageButton"><b>Send Your Thoughts</b></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+        <!-- Footer Start -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="footer-contact">
+                                    <h2>Our Address</h2>
+                                    <p><i class="fa fa-map-marker-alt"></i>Rai University, Fountain Garden</p>
+                                    <p><i class="fa fa-phone-alt"></i>+91 8460107199</p>
+                                    <p><i class="fa fa-envelope"></i>rai@parlourgmail.com</p>
+                                    <div class="footer-social">
+                                        <a href=""><i class="fab fa-twitter"></i></a>
+                                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                                        <a href=""><i class="fab fa-youtube"></i></a>
+                                        <a href=""><i class="fab fa-instagram"></i></a>
+                                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="footer-link">
+                                    <h2>Quick Links</h2>
+                                    <a href="">Terms of use</a>
+                                    <a href="">Privacy policy</a>
+                                    <a href="">Cookies</a>
+                                    <a href="">Help</a>
+                                    <a href="">FQAs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="footer-newsletter">
+                            <h2>Welcome Parlour</h2>
+                            <p>
+                                Join us at Welcome Parlour for delicious food and great moments. We can't wait to serve you! 🍽️✨
+                            </p>
+                            <div class="form">
+                               <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                                    {% csrf_token %}                        
+                                    <input class="form-control" name="email" placeholder="Email goes here">
+                                    <button class="btn custom-btn" type="submit"><b>Connect with Us</b></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="footer-newsletter">
+                            <h2>Opening</h2>
+                            <p>
+                                Monday to Saturday -- 09 AM to 09 PM
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background-color: #fbaf32; color: white;">
+                <marquee behavior="" direction="left"><b>Indulge in a delightful culinary experience at our food parlour! 🌟 Treat your taste buds to our mouthwatering dishes made with the finest ingredients. 🍲✨ Enjoy a cozy and welcoming ambiance that makes every meal special. 🛋️💕 From scrumptious appetizers to decadent desserts, we have something for everyone! 🥗🍰 Take advantage of our special promotions for first-time visitors and loyal customers. 🎉🎁 Conveniently located at Rai University, with ample parking available. 🚗📍 Book your table now and savor the flavors that will leave you craving for more! 📞💖 We look forward to serving you at Welcome Parlour! 😊🍽️</b></marquee>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>Copyright &copy; <a href="#">Welcome Parlour</a>, All Right Reserved.</p>
+                    <p>Designed By <a href="">Krunal Viradiya</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/lib/easing/easing.min.js"></script>
+        <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+        <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        
+        <!-- Contact Javascript File -->
+        <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+        <script src="{% static 'mail/contact.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>

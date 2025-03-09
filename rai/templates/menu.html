@@ -1,0 +1,952 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Welcome Parlour</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="/static/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/static/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="/static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <style>
+        .cart-btn {
+            background-color: rgb(196, 47, 47);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        .list-items{
+            color: #e28413;
+            border: 1px solid #e28413;
+            border-style: none;
+            background: transparent;
+            font-size: 20px;
+            margin-bottom: .5rem;
+            margin-right: .5rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+        .list-items option {
+            color: #e28413;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Nav Bar Start -->
+    <div class="navbar navbar-expand-lg bg-light navbar-light">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand">Welcome <span>Parlour</span></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="/index" class="nav-item nav-link">Home</a>
+                    <a href="/about" class="nav-item nav-link">About</a>
+                    <a href="/feature" class="nav-item nav-link">Feature</a>
+                    <a href="/team" class="nav-item nav-link">Chef</a>
+                    <a href="/menu" class="nav-item nav-link active">Menu</a>
+                    <a href="/contact" class="nav-item nav-link">Contact</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">Log-Out</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="nav-item nav-link">Log-in</a>
+                    <a href="{% url 'register' %}" class="btn custom-btn">Register</a>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <a class="cart-btn" href="{% url 'cart' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+
+
+    <!-- Page Header Start -->
+    <div class="page-header mb-0">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Food Menu</h2>
+                </div>
+                <div class="col-12">
+                    <a href="">Home</a>
+                    <a href="">Menu</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Food Start -->
+    <!-- <div class="food mt-0">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-burger"></i>
+                            <h2>Burgers</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem. 
+                            </p>
+                            <a href="">View Menu</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-snack"></i>
+                            <h2>Snacks</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem. 
+                            </p>
+                            <a href="">View Menu</a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="food-item">
+                            <i class="flaticon-cocktail"></i>
+                            <h2>Beverages</h2>
+                            <p>
+                                Lorem ipsum dolor sit amet elit. Phasel nec pretium mi. Curabit facilis ornare velit non vulputa. Aliquam metus tortor auctor quis sem. 
+                            </p>
+                            <a href="">View Menu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <!-- Food End -->
+
+
+    <!-- Menu Start -->
+    <div class="menu">
+        <div class="container">
+            <div class="section-header text-center">
+                <p>Food Menu</p>
+                <h2>Delicious Food Menu</h2>
+            </div>
+            <div class="menu-tab">
+                <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#southindian">South Indian</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#burger">Burger</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#garlicbread">Garlic Bread</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#drinks">Drinks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#pizza">Pizaa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#snacks">Snacks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#chines">Chines</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#sandwich">Sandwich</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="pill" href="#extras">Extras</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="southindian" class="container tab-pane active">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/planpaper.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Plain Paper</span> <strong>₹ 50</strong></h3>
+                                        <p>Classic Plain Paper Dosa: Light, Crispy Delight, Authentic Indian Flavor</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/masaladosa.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Masala Dosa</span> <strong>₹ 60</strong></h3>
+                                        <p>Spicy Masala Dosa: Stuffed with Flavorful Potato Filling, Indian Comfort</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesedosa.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Dosa</span> <strong>₹ 80</strong></h3>
+                                        <p>Cheesy Delight Dosa: Crispy Dosa Filled with Melted Cheese Goodness</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesebutter.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Butter Paper</span> <strong>₹ 60</strong></h3>
+                                        <p>Cheese Butter Paper Dosa: Crispy Paper Dosa with Melty Cheese & Butter
+                                            Delight</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/uttapam.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Uttapam</span> <strong>₹ 60</strong></h3>
+                                        <p>Classic Uttapam: Fluffy Indian Pancake Topped with Fresh Veggies & Herbs</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/uttapamonion.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Onion Uttapam</span> <strong>₹ 70</strong></h3>
+                                        <p>Onion Uttapam: Fluffy Indian Pancake Loaded with Sweet Caramelized Onions</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/maindosa.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="burger" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/alootikki.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Aloo Tikki Burger - Spicy fried Aloo</span> <strong>₹ 60</strong></h3>
+                                        <p>Aloo Tikki Burger: Spiced Potato Patty with Fresh Veggies, Indian Flavors</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheeseburger.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Burger</span> <strong>₹ 80</strong></h3>
+                                        <p>Cheesy Burger: Juicy Beef Patty with Melted Cheese, Fresh Veggies</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/doublealootikki.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Dubble Tikki Burger</span> <strong>₹ 120</strong></h3>
+                                        <p>Double Tikki Burger: Two Spiced Potato Patties, Fresh Veggies, Tangy Sauces
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/mainburger.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="garlicbread" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/garlicbread.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Garlic Bread</span> <strong>₹ 100</strong></h3>
+                                        <p>Garlic Bread: Crispy Bread with Buttery Garlic Spread, Fresh Herbs</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesegarlic.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Garlic Bread</span> <strong>₹ 100</strong></h3>
+                                        <p>Cheese Garlic Bread: Crispy Bread with Buttery Garlic and Melted Cheese,
+                                            Fresh Herbs</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/americancorngarlic.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>American Corn Garlic Bread</span> <strong>₹ 130</strong></h3>
+                                        <p>American Corn Garlic Bread: Crispy Bread with Buttery Garlic, Sweet Corn &
+                                            Fresh Herbs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/maingarlic.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="drinks" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/tea.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Tea</span> <strong>₹ 10</strong></h3>
+                                        <p>Tea is more than a beverage; it’s an experience. One sip, a thousand stories
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/chocolateshake.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Chocolate Shake</span> <strong>₹ 70</strong></h3>
+                                        <p>"Enjoy the rich and creamy delight of our Chocolate Shake, perfectly blended
+                                            with premium cocoa and topped with a dollop of whipped cream for an
+                                            indulgent treat.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/coldcoffe.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cold Coffee</span> <strong>₹ 80</strong></h3>
+                                        <p>Refresh with our smooth, ice-cold blend of rich coffee and milk</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/oreoshake.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Oreo Shake</span> <strong>₹ 100</strong></h3>
+                                        <p>Indulge in our creamy Oreo Shake, blended to perfection with crushed cookies
+                                            and topped with whipped cream for a delightful treat</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/fanta.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Fanta</span> <strong>₹ 20</strong></h3>
+                                        <p>"Refresh yourself with the fizzy, citrusy goodness of Fanta, bursting with
+                                            vibrant orange flavor.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/mountaindew.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Mountain Dew</span> <strong>₹ 20</strong></h3>
+                                        <p>Quench your thirst with the exhilarating, citrusy zing of Mountain Dew</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/pepsi.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Pepsi</span> <strong>₹ 20</strong></h3>
+                                        <p>"Enjoy the classic, refreshing taste of Pepsi, perfect for any occasion</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cocacola.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Coca Cola</span> <strong>₹ 20</strong></h3>
+                                        <p>Experience the refreshing, timeless taste of Coca-Cola, the perfect companion
+                                            for any moment.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/sting.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Sting</span> <strong>₹ 20</strong></h3>
+                                        <p>"Feel the electrifying buzz of Sting, an energy drink that packs a punch</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/sosyo.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Sosyo</span> <strong>₹ 20</strong></h3>
+                                        <p>Relish the unique, tangy flavor of Sosyo, a perfect blend of fruit and fizz
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/thumbsup.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Thumps Up</span> <strong>₹ 20</strong></h3>
+                                        <p>Experience the bold, strong flavor of Thums Up, the ultimate refreshment with
+                                            a kick.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/sprite.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Sprite</span> <strong>₹ 20</strong></h3>
+                                        <p>Refresh with the crisp, lemon-lime taste of Sprite, the ultimate
+                                            thirst-quencher.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/campa.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Campa</span> <strong>₹ 20</strong></h3>
+                                        <p>"Refresh with the classic, citrusy flavor of Campa, the perfect
+                                            thirst-quenche</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/mazza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Maaza</span> <strong>₹ 25</strong></h3>
+                                        <p>Savor the rich, mango-flavored delight of Maaza, a refreshing tropical
+                                            escape.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/hell.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Hell</span> <strong>₹ 60</strong></h3>
+                                        <p>"Revitalize with the intense energy boost of Hell, perfect for an instant
+                                            pick-me-up</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/redbull.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Red Bull</span> <strong>₹ 125</strong></h3>
+                                        <p>Boost your energy with Red Bull, the ultimate fuel for your active lifestyle.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/drinksmain.jpg" alt="Image"> <br><br><br> <br><br>
+                                <img src="/static/img/drinksmain2.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pizza" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/vegpizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Veg PIzza</span> <strong>₹ 110</strong></h3>
+                                        <p>Enjoy our delicious Veg Pizza, topped with a vibrant mix of fresh vegetables,
+                                            mozzarella cheese, and a perfectly seasoned tomato sauce</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/italianpizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Italian Pizza</span> <strong>₹ 120</strong></h3>
+                                        <p>"Savor the taste of our authentic Italian Pizza, featuring a thin, crispy
+                                            crust topped with fresh tomatoes, mozzarella, basil, and a drizzle of olive
+                                            oil.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/margheritapizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Margherita Pizza</span> <strong>₹ 120</strong></h3>
+                                        <p>"Savor the simplicity of our Margherita Pizza, topped with fresh tomatoes,
+                                            mozzarella cheese, and fragrant basil leaves on a perfectly baked crust</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/americancornpizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>American Corn Pizza</span> <strong>₹ 140</strong></h3>
+                                        <p>Delight in our American Corn Pizza, topped with sweet corn, fresh veggies,
+                                            and a generous layer of mozzarella cheese on a perfectly baked crust.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/7cheesepizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>7 Cheese Pizza</span> <strong>₹ 160</strong></h3>
+                                        <p>Indulge in our 7 Cheese Pizza, a decadent blend of mozzarella, cheddar,
+                                            parmesan, gouda, blue cheese, provolone, and ricotta, melted to perfection
+                                            on a golden crust</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/valcenopizza.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Volcano Pizza</span> <strong>₹ 180</strong></h3>
+                                        <p>Experience the fiery flavors of our Volcano Pizza, topped with spicy peppers,
+                                            tangy sauce, and a blend of molten cheeses that bring the heat</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/pizzamain.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="snacks" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/dabeli.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Dabeli</span> <strong>₹ 30</strong></h3>
+                                        <p>Treat yourself to our flavorful Dabeli, a spicy and tangy Indian street food
+                                            delight, filled with a delicious mix of mashed potatoes, chutneys, and
+                                            crunchy peanuts.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/masala pav.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Masala Pav</span> <strong>₹ 20</strong></h3>
+                                        <p>"Savor the spicy and tangy flavors of our Masala Pav, a delectable mix of
+                                            sautéed vegetables and aromatic spices, served in a soft, buttered pav.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/vadapau.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Vada Pav</span> <strong>₹ 30</strong></h3>
+                                        <p>"Relish the iconic flavors of our Vada Pav, featuring a spicy potato fritter
+                                            encased in a soft bun, served with tangy chutneys for a perfect street food
+                                            experience</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/breadpakoda.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Bread Pakoda</span> <strong>₹ 30</strong></h3>
+                                        <p>"Enjoy our delicious Bread Pakoda, golden-fried bread slices stuffed with a
+                                            savory potato filling, perfect for a crispy and flavorful snack.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/periperifrench.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Peri Peri French Fries</span> <strong>₹ 60</strong></h3>
+                                        <p>"Spice up your snack time with our Peri Peri French Fries, crispy and
+                                            perfectly seasoned with a zesty peri peri mix</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/mayoniesfrench.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Mayonnaise French Fries</span> <strong>₹ 70</strong></h3>
+                                        <p>Indulge in our crispy French Fries, perfectly paired with a creamy mayonnaise
+                                            dip for a delightful snack experience</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/snacksmain.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="chines" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/planmeggie.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Plain Maggie</span> <strong>₹ 40</strong></h3>
+                                        <p>Plan Maggi: Flavorful noodles with spices and a cheesy twist.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/onionmeggie.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Onion Maggie</span> <strong>₹ 50</strong></h3>
+                                        <p>Onion Maggi: Savory noodles infused with aromatic onions and spices.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesemaggie.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Maggie</span> <strong>₹ 60</strong></h3>
+                                        <p>Cheese Maggi: Tasty noodles with a creamy, cheesy delight.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/drymanchurian.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Dry Manchurian</span> <strong>₹ 70</strong></h3>
+                                        <p>Dry Manchurian: Crispy vegetable balls tossed in tangy Manchurian sauce.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/gravymanchurain.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Gravy Manchurian</span> <strong>₹ 80</strong></h3>
+                                        <p>Gravy Manchurian: Crispy vegetable balls in a rich, savory sauce</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/hakkanoodles.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Hakka Noodles</span> <strong>₹ 60</strong></h3>
+                                        <p>Hakka Noodles: Stir-fried noodles with vegetables in savory Asian sauce</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/chinesmain.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sandwich" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/aloomatarsandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Aloo Matar</span> <strong>₹ 40</strong></h3>
+                                        <p>Aloo Matar Sandwich: Spiced potato and pea filling in toasted bread.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesealoomatarsandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Aloo Matar</span> <strong>₹ 50</strong></h3>
+                                        <p>Cheese Aloo Matar Sandwich: Spiced potato, peas, and cheese in toast.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/vegetablesandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Vegetable</span> <strong>₹ 60</strong></h3>
+                                        <p>Vegetable Sandwich: Fresh, crunchy veggies with a flavorful spread in toast.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesevegetable.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Vegetable</span> <strong>₹ 70</strong></h3>
+                                        <p>Cheese Vegetable Sandwich: Fresh veggies and melted cheese in toasted bread
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cheesesandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Cheese Sandwich</span> <strong>₹ 80</strong></h3>
+                                        <p>Cheese Sandwich: Melty cheese between toasted slices of delicious bread</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/maxicansandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Maxican Sandwich</span> <strong>₹ 60</strong></h3>
+                                        <p>Mexican Sandwich: Spicy veggies, beans, and cheese in toasted bread.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/clubsandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Club Sandwich</span> <strong>₹ 60</strong></h3>
+                                        <p>Club Sandwich: Triple-layered sandwich with cheese, veggies, and mayo</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/mountainsandwich.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Mountain Sandwich</span> <strong>₹ 60</strong></h3>
+                                        <p>Mountain Sandwich: Hearty layers of cheese, veggies, and sauces</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="img/sandwichmain.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="extras" class="container tab-pane fade">
+                        <div class="row">
+                            <div class="col-lg-7 col-md-12">
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/maskabun.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Maska Bun</span> <strong>₹ 30</strong></h3>
+                                        <p>Maska Bun: Soft bun with generous butter spread, simple and tasty.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/cholekhulche.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Chole Khulche</span> <strong>₹ 70</strong></h3>
+                                        <p>Chole Kulche: Spicy chickpea curry served with soft, fluffy bread.</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/buttercholekhulche.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Butter Chole Khulche</span> <strong>₹ 80</strong></h3>
+                                        <p>Butter Chole Kulche: Spicy chickpea curry with buttered, soft, fluffy bread
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/paubhaji.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Pav Bhaji</span> <strong>₹ 90</strong></h3>
+                                        <p>Pav Bhaji: Spicy vegetable mash served with buttered, toasted buns</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/butterpaubhaji.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Butter Pav Bhaji</span> <strong>₹ 100</strong></h3>
+                                        <p>Butter Pav Bhaji: Spicy veggie mash with buttered, toasted buns</p>
+                                    </div>
+                                </div>
+                                <div class="menu-item">
+                                    <div class="menu-img">
+                                        <img src="/static/img/thepla.jpg" alt="Image">
+                                    </div>
+                                    <div class="menu-text">
+                                        <h3><span>Thepla</span> <strong>₹ 30</strong></h3>
+                                        <p>Thepla: Spiced flatbread made with whole wheat flour and herbs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 d-none d-lg-block">
+                                <img src="/static/img/extrasend.jpg" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Menu End -->
+
+
+    <!-- Footer Start -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="footer-contact">
+                                <h2>Our Address</h2>
+                                <p><i class="fa fa-map-marker-alt"></i>Rai University, Fountain Garden</p>
+                                <p><i class="fa fa-phone-alt"></i>+91 8460107199</p>
+                                <p><i class="fa fa-envelope"></i>rai@parlourgmail.com</p>
+                                <div class="footer-social">
+                                    <a href=""><i class="fab fa-twitter"></i></a>
+                                    <a href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a href=""><i class="fab fa-youtube"></i></a>
+                                    <a href=""><i class="fab fa-instagram"></i></a>
+                                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="footer-link">
+                                <h2>Quick Links</h2>
+                                <a href="">Terms of use</a>
+                                <a href="">Privacy policy</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="footer-newsletter">
+                        <h2>Welcome Parlour</h2>
+                        <p>
+                            Join us at Welcome Parlour for delicious food and great moments. We can't wait to serve you!
+                            🍽️✨
+                        </p>
+                        <form action="{% url 'subscribe_newsletter' %}" method="POST">
+                            {% csrf_token %}
+                            <input class="form-control" name="email" placeholder="Email goes here">
+                            <button class="btn custom-btn" type="submit"><b>Connect with Us</b></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="footer-newsletter">
+                        <h2>Opening</h2>
+                        <p>
+                            Monday to Saturday -- 09 AM to 09 PM
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #fbaf32; color: white;">
+            <marquee behavior="" direction="left"><b>Indulge in a delightful culinary experience at our food parlour! 🌟
+                    Treat your taste buds to our mouthwatering dishes made with the finest ingredients. 🍲✨ Enjoy a cozy
+                    and welcoming ambiance that makes every meal special. 🛋️💕 From scrumptious appetizers to decadent
+                    desserts, we have something for everyone! 🥗🍰 Take advantage of our special promotions for
+                    first-time visitors and loyal customers. 🎉🎁 Conveniently located at Rai University, with ample
+                    parking available. 🚗📍 Book your table now and savor the flavors that will leave you craving for
+                    more! 📞💖 We look forward to serving you at Welcome Parlour! 😊🍽️</b></marquee>
+        </div>
+        <div class="copyright">
+            <div class="container">
+                <p>Copyright &copy; <a href="#">Welcome Parlour</a>, All Right Reserved.</p>
+                <p>Designed By <a href="">Krunal Viradiya</a></p>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/easing/easing.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="{% static 'mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static 'mail/contact.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

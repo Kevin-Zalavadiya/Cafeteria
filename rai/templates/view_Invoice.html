@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+</head>
+<body>
+    <h1>Invoice</h1>
+    <table>
+        <tr>
+            <th>Item Name</th>
+            <th>Price (₹)</th>
+        </tr>
+        {% for item in invoice.items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><strong>Total</strong></td>
+            <td><strong>₹ {{ invoice.total }}</strong></td>
+        </tr>
+    </table>
+    <p>Instructions: Scan the QR code using your mobile device's camera. Review the invoice details carefully. Process the payment through your preferred method.</p>
+</body>
+</html>
