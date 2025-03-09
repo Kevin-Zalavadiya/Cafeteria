@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Register - Parlour</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free Website Template" name="keywords">
+    <meta content="Free Website Template" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
+    
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/flaticon/font/flaticon.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <style>
+        :root {
+            --background: #fbf5f3;
+            --color: #e28413;
+            --primary-color: #000022;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "poppins";
+            background: var(--background);
+            color: var(--color);
+            letter-spacing: 1px;
+        }
+
+        .navbar{
+            margin-top:-100px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            margin-top: 5rem;
+        }
+
+        .register-container {
+            position: relative;
+            width: 25rem;
+            /* height: 35rem; */
+        }
+
+        .form-container {
+            border: 1px solid hsla(0, 0%, 65%, 0.158);
+            box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(20px);
+            z-index: 99;
+            padding: 2rem;
+        }
+
+        .register-container form input {
+            display: block;
+            padding: 14.5px;
+            width: 100%;
+            margin: 1rem 0;
+            color: var(--color);
+            outline: none;
+            background-color: #9191911f;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            font-size: 15px;
+            backdrop-filter: blur(15px);
+        }
+
+        .register-container form button {
+            background-color: var(--primary-color);
+            color: var(--color);
+            display: block;
+            padding: 13px;
+            border-radius: 5px;
+            outline: none;
+            font-size: 18px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+            margin: 2rem 0;
+            border: none;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .register-container form button:hover {
+            box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
+            transform: scale(1.02);
+        }
+
+        .circle {
+            width: 8rem;
+            height: 8rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .circle-one {
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transform: translate(-45%, -45%);
+        }
+
+        .circle-two {
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            transform: translate(45%, 45%);
+        }
+
+        .error-message {
+            color: #ff4444;
+            margin-bottom: 1rem;
+        }
+
+        
+        .cart-btn {
+            background-color: rgb(196, 47, 47);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        .list-items option {
+            color: orange;
+            font-weight: bold;
+            font-size: 20px;
+        }
+    
+        .list-items{
+            color: #e28413;
+            border: 1px solid #e28413;
+            border-style: none;
+            background: transparent;
+            font-size: 20px;
+            margin-bottom: .5rem;
+            margin-right: .5rem;
+            font-weight: bold;
+            margin-left: 1rem;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <!-- Navbar Start -->
+    <div class="navbar navbar-expand-lg bg-light navbar-light">
+        <div class="container-fluid">
+            <a href="{% url 'index' %}" class="navbar-brand">Welcome <span>Parlour</span></a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="{% url 'index' %}" class="nav-item nav-link" style="color: #e28413;">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link" style="color: #e28413;">About</a>
+                    <a href="{% url 'feature' %}" class="nav-item nav-link" style="color: #e28413;">Feature</a>
+                    <a href="{% url 'team' %}" class="nav-item nav-link" style="color: #e28413;">Chef</a>
+                    <a href="{% url 'menu' %}" class="nav-item nav-link" style="color: #e28413;">Menu</a>
+                    <a href="{% url 'contact' %}" class="nav-item nav-link" style="color: #e28413;">Contact</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="btn custom-btn" style="background-color: #e28413; color: white;">Log-Out</a>
+                    <a class="cart-btn" href="{% url 'cart' %}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn custom-btn">Log-in</a>
+                    <a href="{% url 'register' %}" class="btn custom-btn active">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+    <section class="container">
+        <div class="register-container">
+            <div class="circle circle-one"></div>
+            <div class="form-container">
+                <h1 class="opacity">REGISTER</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="error-message">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="UID Number" required />
+                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="password" name="password1" placeholder="Password" required />
+                    <input type="password" name="password2" placeholder="Confirm Password" required />
+                    <input type="tel" name="phone" placeholder="Phone Number" required />
+                    <button type="submit" class="opacity" onclick="alert('Registration successful! Please login.')">REGISTER</button>
+                </form>
+                <div class="register-forget opacity">
+                    <a href="{% url 'login' %}">Already have an account? Login</a>
+                </div>
+            </div>
+            <div class="circle circle-two"></div>
+        </div>
+    </section>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
