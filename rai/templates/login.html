@@ -274,6 +274,25 @@
             font-weight: bold;
             font-size: 20px;
         }
+        .error-message {
+            color: #ff4444;
+            margin-bottom: 1rem;
+            font-size: 14px;
+            background-color: rgba(255, 68, 68, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #ff4444;
+        }
+        
+        .success-message {
+            color: #00C851;
+            margin-bottom: 1rem;
+            font-size: 14px;
+            background-color: rgba(0, 200, 81, 0.1);
+            padding: 8px;
+            border-radius: 5px;
+            border-left: 3px solid #00C851;
+        }
     </style>
 </head>
 <body>
@@ -312,11 +331,22 @@
             <div class="form-container">
                 <!-- <img src="{% static 'img/illustration.png' %}" alt="illustration" class="illustration" /> -->
                 <h1 class="opacity">LOGIN</h1>
-                <form method="post">
+                
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if 'success' in message.tags %}
+                            <div class="success-message">{{ message }}</div>
+                        {% else %}
+                            <div class="error-message">{{ message }}</div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                
+                <form method="post" id="loginForm">
                     {% csrf_token %}
                     <input type="text" name="number" placeholder="UID Number" required />
                     <input type="password" name="password" placeholder="PASSWORD" required />
-                    <button type="submit" class="opacity" onclick="alert('Login successful!')">SUBMIT</button>
+                    <button type="submit" class="opacity">SUBMIT</button>
                 </form>
                 <div class="register-forget opacity">
                     <a href="{% url 'register' %}">REGISTER</a>
