@@ -115,6 +115,7 @@
 
       /* Cuisine Navigation */
       .cuisine-nav {
+        justify-content: center;
         max-width: 1220px;
         margin: 0 auto 2rem;
         display: flex;
@@ -443,20 +444,14 @@
     <div class="header-image"></div>
     <main>
       <nav class="cuisine-nav">
-        <button class="cuisine-btn active" data-cuisine="southindian">
-          South Indian
-        </button>
-        <button class="cuisine-btn" data-cuisine="burgers">Burgers</button>
-        <button class="cuisine-btn" data-cuisine="garlicbread">
-          Garlic Bread
-        </button>
+        <button class="cuisine-btn active" data-cuisine="southindian">South Indian</button>
+        <button class="cuisine-btn" data-cuisine="american">American</button>
+        <button class="cuisine-btn" data-cuisine="italian">Italian</button>
         <button class="cuisine-btn" data-cuisine="drinks">Drinks</button>
-        <button class="cuisine-btn" data-cuisine="pizza">Pizza</button>
         <button class="cuisine-btn" data-cuisine="snacks">Snacks</button>
-        <button class="cuisine-btn" data-cuisine="chines">Chines</button>
-        <button class="cuisine-btn" data-cuisine="sandwich">Sandwich</button>
+        <button class="cuisine-btn" data-cuisine="chines">Chinese</button>
         <button class="cuisine-btn" data-cuisine="extras">Extras</button>
-        
+      </nav>
       </nav>
 
       <section class="food-section active" id="southindian">
@@ -541,6 +536,131 @@
         </div>
       </section>
 
+<section class="food-section" id="american">
+  <h2 class="section-title">American Delights</h2>
+  <div class="food-slider">
+    <button class="slider-btn prev">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <div class="slider-container">
+      <div class="food-items">
+        <div class="food-item">
+          <img src="/static/img/alootikki.jpg" alt="Aloo Tikki Burger">
+          <h3>Aloo Tikki Burger</h3>
+          <p>₹ 60</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="60">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/cheeseburger.jpg" alt="Cheese Burger">
+          <h3>Cheese Burger</h3>
+          <p>₹ 80</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="80">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/doublealootikki.jpg" alt="Double Tikki Burger">
+          <h3>Double Tikki Burger</h3>
+          <p>₹ 120</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="120">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/aloomatarsandwich.jpg" alt="Aloo Matar Sandwich">
+          <h3>Aloo Matar Sandwich</h3>
+          <p>₹ 40</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="40">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/cheesealoomatarsandwich.jpg" alt="Cheese Aloo Matar Sandwich">
+          <h3>Cheese Aloo Matar Sandwich</h3>
+          <p>₹ 50</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="50">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/vegetablesandwich.jpg" alt="Vegetable Sandwich">
+          <h3>Vegetable Sandwich</h3>
+          <p>₹ 60</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="60">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/cheesevegetable.jpg" alt="Cheese Vegetable Sandwich">
+          <h3>Cheese Vegetable Sandwich</h3>
+          <p>₹ 70</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="70">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/cheesesandwich.jpg" alt="Cheese Sandwich">
+          <h3>Cheese Sandwich</h3>
+          <p>₹ 80</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="80">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/maxicansandwich.jpg" alt="Mexican Sandwich">
+          <h3>Mexican Sandwich</h3>
+          <p>₹ 60</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="60">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="/static/img/clubsandwich.jpg" alt="Club Sandwich">
+          <h3>Club Sandwich</h3>
+          <p>₹ 60</p>
+          <div class="quantity-controls">
+            <button class="quantity-btn minus">-</button>
+            <span class="quantity">0</span>
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="add-to-cart" data-price="60">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <button class="slider-btn next">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</section>
       <section class="food-section" id="burgers">
         <h2 class="section-title">Burgers Delights</h2>
         <div class="food-slider">
@@ -590,16 +710,17 @@
         </div>
       </section>
 
-      <section class="food-section" id="garlicbread">
-        <h2 class="section-title">Garlic Bread Delights</h2>
+      <section class="food-section" id="italian">
+        <h2 class="section-title">Italian Delights</h2>
         <div class="food-slider">
           <button class="slider-btn prev">
             <i class="fas fa-chevron-left"></i>
           </button>
           <div class="slider-container">
             <div class="food-items">
+              <!-- Garlic Bread items -->
               <div class="food-item">
-                <img src="/static/img/garlicbread.jpg" alt="Butter Chicken" />
+                <img src="/static/img/garlicbread.jpg" alt="Garlic Bread" />
                 <h3>Garlic Bread</h3>
                 <p>₹ 100</p>
                 <div class="quantity-controls">
@@ -610,7 +731,7 @@
                 <button class="add-to-cart" data-price="100">Add to Cart</button>
               </div>
               <div class="food-item">
-                <img src="/static/img/cheesegarlic.jpg" alt="Naan" />
+                <img src="/static/img/cheesegarlic.jpg" alt="Cheese Garlic Bread" />
                 <h3>Cheese Garlic Bread</h3>
                 <p>₹ 100</p>
                 <div class="quantity-controls">
@@ -621,7 +742,7 @@
                 <button class="add-to-cart" data-price="100">Add to Cart</button>
               </div>
               <div class="food-item">
-                <img src="/static/img/americancorngarlic.jpg" alt="Naan" />
+                <img src="/static/img/americancorngarlic.jpg" alt="American Corn Garlic Bread" />
                 <h3>American Corn Garlic Bread</h3>
                 <p>₹ 130</p>
                 <div class="quantity-controls">
@@ -631,12 +752,49 @@
                 </div>
                 <button class="add-to-cart" data-price="130">Add to Cart</button>
               </div>
+              
+              <!-- Pizza items -->
+              <div class="food-item">
+                <img src="/static/img/vegpizza.jpg" alt="Veg Pizza" />
+                <h3>Veg Pizza</h3>
+                <p>₹ 110</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="110">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/italianpizza.jpg" alt="Italian Pizza" />
+                <h3>Italian Pizza</h3>
+                <p>₹ 120</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="120">Add to Cart</button>
+              </div>
+              <div class="food-item">
+                <img src="/static/img/margheritapizza.jpg" alt="Margherita Pizza" />
+                <h3>Margherita Pizza</h3>
+                <p>₹ 120</p>
+                <div class="quantity-controls">
+                  <button class="quantity-btn minus">-</button>
+                  <span class="quantity">0</span>
+                  <button class="quantity-btn plus">+</button>
+                </div>
+                <button class="add-to-cart" data-price="120">Add to Cart</button>
+              </div>
+              <!-- Add more pizza items here -->
             </div>
           </div>
           <button class="slider-btn next">
             <i class="fas fa-chevron-right"></i>
           </button>
         </div>
+      </section>
       </section>
 
       <section class="food-section" id="drinks">

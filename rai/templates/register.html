@@ -218,14 +218,14 @@
                         <div class="error-message">{{ message }}</div>
                     {% endfor %}
                 {% endif %}
-                <form method="post">
+                <form method="post" id="registerForm">
                     {% csrf_token %}
-                    <input type="text" name="username" placeholder="UID Number" required />
-                    <input type="email" name="email" placeholder="Email" required />
+                    <input type="text" name="username" placeholder="UID Number" required value="{{ username|default:'' }}" />
+                    <input type="email" name="email" placeholder="Email" required value="{{ email|default:'' }}" />
                     <input type="password" name="password1" placeholder="Password" required />
                     <input type="password" name="password2" placeholder="Confirm Password" required />
-                    <input type="tel" name="phone" placeholder="Phone Number" required />
-                    <button type="submit" class="opacity" onclick="alert('Registration successful! Please login.')">REGISTER</button>
+                    <input type="tel" name="phone" placeholder="Phone Number" required value="{{ phone|default:'' }}" />
+                    <button type="submit" class="opacity">REGISTER</button>
                 </form>
                 <div class="register-forget opacity">
                     <a href="{% url 'login' %}">Already have an account? Login</a>
@@ -246,5 +246,93 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        // Remove the alert from the button onclick
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerButton = document.querySelector('button[type="submit"]');
+            if (registerButton) {
+                registerButton.removeAttribute('onclick');
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const usernameInput = form.querySelector('input[name="username"]');
+            const emailInput = form.querySelector('input[name="email"]');
+            const password1Input = form.querySelector('input[name="password1"]');
+            const password2Input = form.querySelector('input[name="password2"]');
+            const phoneInput = form.querySelector('input[name="phone"]');
+            
+            form.addEventListener('submit', function(event) {
+                let isValid = true;
+                
+                // Clear previous error messages
+                const errorMessages = document.querySelectorAll('.input-error');
+                errorMessages.forEach(el => el.remove());
+                
+                // Validate UID Number (username) with new format
+                if (!usernameInput.value.trim()) {
+                    showError(usernameInput, 'UID Number is required');
+                    isValid = false;
+                } else if (!/^\d{2}[A-Z]{3}\d{3}$/.test(usernameInput.value.trim())) {
+                    showError(usernameInput, 'UID Number should be in the format: 24MCA005');
+                    isValid = false;
+                }
+                
+                // Validate email
+                if (!emailInput.value.trim()) {
+                    showError(emailInput, 'Email is required');
+                    isValid = false;
+                } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(emailInput.value.trim())) {
+                    showError(emailInput, 'Please enter a valid email address');
+                    isValid = false;
+                }
+                
+                // Validate password
+                if (!password1Input.value) {
+                    showError(password1Input, 'Password is required');
+                    isValid = false;
+                } else if (password1Input.value.length < 8) {
+                    showError(password1Input, 'Password must be at least 8 characters long');
+                    isValid = false;
+                }
+                
+                // Validate password confirmation
+                if (!password2Input.value) {
+                    showError(password2Input, 'Please confirm your password');
+                    isValid = false;
+                } else if (password1Input.value !== password2Input.value) {
+                    showError(password2Input, 'Passwords don't match');
+                    isValid = false;
+                }
+                
+                // Validate phone number
+                if (!phoneInput.value.trim()) {
+                    showError(phoneInput, 'Phone number is required');
+                    isValid = false;
+                } else {
+                    const phoneDigits = phoneInput.value.replace(/\D/g, '');
+                    if (phoneDigits.length !== 10 || !/^\d+$/.test(phoneDigits)) {
+                        showError(phoneInput, 'Please enter a valid 10-digit phone number');
+                        isValid = false;
+                    }
+                }
+                
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            });
+
+            function showError(input, message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'input-error';
+                errorDiv.style.color = '#ff4444';
+                errorDiv.style.marginBottom = '1rem';
+                errorDiv.textContent = message;
+                input.parentNode.insertBefore(errorDiv, input.nextSibling);
+            }
+        });
+    </script>
 </body>
 </html>
